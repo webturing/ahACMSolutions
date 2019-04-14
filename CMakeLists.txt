@@ -1,2 +1,2 @@
 set(CMAKE_CXX_STANDARD 11)
-add_executable(cp3 main.cpp)
+add_executable(cp3 2018/A.cpp)
