@@ -38,8 +38,8 @@ int main() {
         for (int i = 2; i <= n; i++) {
             if (ticket[i] >= ticket[1]) //最多只能给（max - ticket[i]）个，使的他的票数为max
                 count = count - (max - ticket[i]);
-                    else
-                    count -= a;
+            else
+                count -= a;
         }
 
         if (count <= 0)     //如果此时票数分完了，也就是已经够了（上面已经保证每一个都不大于ticket[1]）
