@@ -22,7 +22,7 @@ int main() {
             for (int i = 2; i <= n; i++) {
                 for (int j = 0; j <= 3 * i; j++) {
                     for (int k = 0; k <= j && k <= 3; k++) {
-                        f[i][j] += f[(i - 1 + n) % 2][j - k] * 0.25;
+                        f[i][j] += f[(i + 1) % 2][j - k] * 0.25;
                     }
                 }
             }
