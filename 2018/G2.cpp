@@ -10,8 +10,8 @@ int main() {
     while (T-- > 0) {
         int n, h;
         cin >> n >> h;
-        if (h < 3 * n) cout << "1.000000" << endl;
-        else if (h > 6 * n) cout << "0.000000" << endl;
+        if (h < 3 * n) cout << "1.000000" << '\n';
+        else if (h > 6 * n) cout << "0.000000" << '\n';
         else {
             h -= 3 * n;
             memset(f, 0, sizeof(f));
@@ -26,6 +26,8 @@ int main() {
                         f[i][j] += 0.25 * f[i - 1][j - k];
                     }
                 }
+                copy(f[i], f[i] + 3 * i + 1, ostream_iterator<double>(cout, " "));
+                cout << endl;
             }
             cout << fixed << setprecision(6) << accumulate(f[n] + h, f[n] + 3 * n + 1, 0.0) << '\n';
         }
