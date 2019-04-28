@@ -4,9 +4,7 @@
 using namespace std;
 
 int main() {
-    string a, b;
-
-    while (getline(cin, a) && getline(cin, b)) {
+    for (string a, b; getline(cin, a) and getline(cin, b);) {
         transform(a.begin(), a.end(), a.begin(), _tolower);
         transform(b.begin(), b.end(), b.begin(), _tolower);
         int ans = 0;
