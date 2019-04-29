@@ -1,65 +1,47 @@
-//
-// Created by webturing on 4/23/19.
-//
-
-#include <cstdio>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int n, m;
-int ans[100005];
+const int MXAN = 200 + 10;
+int a[MXAN][MXAN];
+int sum[MXAN][MXAN];
 
-bool check(int k);
-
-int main(void) {
+int main() {
     int t;
-    scanf("%d", &t);
-
-    int sum;
+    cin >> t;
     while (t--) {
-        sum = 0;
-        int minn = 0x3f3f3f3f;
-        scanf("%d%d", &n, &m);
+        int n, m;
+        cin >> n >> m;
         for (int i = 1; i <= n; i++) {
-            scanf("%d", &ans[i]);
-            minn = min(minn, ans[i]);
-            sum += ans[i];
-        }
-
-        int l = minn;
-        int r = sum;
-        int mid, res;
-        while (l <= r) {
-            mid = (l + r) / 2;
-            if (check(mid)) {
-                l = mid + 1;
-                res = mid;
-            } else {
-                r = mid - 1;
+            for (int j = 1; j <= m; j++) {
+                cin >> a[i][j];
+                sum[i][j] = sum[i][j - 1] + a[i][j];
             }
-
         }
-        printf("%d\n", res - 1);
+        int res = 0;
+        for (int i = 1; i <= m; i++) {
+            for (int j = i; j <= m; j++) {
+                int tmp = 0;
+                int len = 1;
+                for (int line = 1; line <= n; line++) {
+                    if (tmp != 0) {
+                        if (a[line][i] == 1 && a[line][j] == 1) {
+                            len++;
+                        }
+                        if (sum[line][j] - sum[line][i - 1] == j - i + 1) {
+                            res = max(res, len * (j - i + 1));
+                        }
+                        if (a[line][i] == 0 || a[line][j] == 0) {
+                            len = 1;
+                            tmp = 0;
+                        }
+                    }
+                    if (sum[line][j] - sum[line][i - 1] == j - i + 1)
+                        tmp = 1;
+                }
+            }
+        }
+        cout << res << endl;
     }
 
     return 0;
-}
-
-bool check(int k) {
-    int num = 1;
-    int cnt = 0;
-
-    for (int i = 1; i <= n; i++) {
-        if (cnt + ans[i] <= k) {
-            cnt += ans[i];
-        } else {
-            num++;
-            cnt = ans[i];
-        }
-    }
-    if (num > m)
-        return true;
-    else
-        return false;
 }
